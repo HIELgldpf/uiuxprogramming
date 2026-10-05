@@ -1,9 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #0b1117;
     color: #d9e8f2;
+    overflow-x: hidden;
 }
+
+
+/* =========================
+   Header
+========================= */
 
 header {
     background-color: #111c27;
@@ -24,21 +38,32 @@ header p {
     line-height: 1.6;
 }
 
+
+/* =========================
+   Main
+========================= */
+
 main {
-    width: 1000px;
+    width: 90%;
+    max-width: 1000px;
     margin: 40px auto;
     display: grid;
-    grid-template-columns: 170px 1fr;
+    grid-template-columns: 170px minmax(0, 1fr);
     gap: 40px;
 }
 
-/* 왼쪽 Contents */
+
+/* =========================
+   Contents Navigation
+========================= */
 
 aside {
     padding: 25px 10px;
     position: sticky;
     top: 25px;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
 }
 
 aside strong {
@@ -64,13 +89,20 @@ aside a:hover {
     color: #d9e8f2;
 }
 
-/* 본문 */
+
+/* =========================
+   Content
+========================= */
 
 .content {
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
 }
 
 section {
+    width: 100%;
+    max-width: 100%;
     background-color: #111c27;
     margin-bottom: 28px;
     padding: 35px 40px;
@@ -102,11 +134,16 @@ p {
     line-height: 1.8;
 }
 
-/* 이미지 */
+
+/* =========================
+   Images
+========================= */
 
 img {
     display: block;
+    width: 100%;
     max-width: 500px;
+    height: auto;
     margin-top: 25px;
     border: 1px solid #29485d;
     border-radius: 10px;
@@ -114,6 +151,7 @@ img {
 
 .image-description {
     display: inline-block;
+    max-width: 100%;
     margin-top: 10px;
     padding: 8px 13px;
     background-color: #172b3d;
@@ -124,7 +162,44 @@ img {
     line-height: 1.5;
 }
 
-/* 의견 입력 */
+
+/* =========================
+   Feature Cards
+========================= */
+
+.feature-list {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.feature-card {
+    min-width: 0;
+    padding: 20px;
+    background-color: #172b3d;
+    border: 1px solid #29485d;
+    border-radius: 10px;
+}
+
+.feature-card h4 {
+    margin: 0 0 10px;
+    color: #78c5ef;
+    font-size: 17px;
+}
+
+.feature-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   Email Form
+========================= */
 
 form {
     margin-top: 25px;
@@ -134,30 +209,242 @@ form {
     border-radius: 10px;
 }
 
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #8fb3ca;
+}
+
+.email-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 input {
-    padding: 9px;
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
     background-color: #0b1117;
     color: #d9e8f2;
     border: 1px solid #326d94;
     border-radius: 6px;
 }
 
+input::placeholder {
+    color: #61798a;
+}
+
 button {
-    padding: 9px 18px;
-    margin-left: 5px;
+    padding: 10px 18px;
     background-color: #286f9f;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 button:hover {
     background-color: #358bc1;
 }
 
+
+/* =========================
+   Footer
+========================= */
+
 footer {
     text-align: center;
     padding: 30px;
     color: #7192a8;
+}
+
+
+/* =========================
+   Responsive
+   768px 이하
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 40px 20px;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+
+    /* Navigation 세로 배치 */
+
+    main {
+        width: 92%;
+        margin: 25px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    aside {
+        width: 100%;
+        position: static;
+        padding: 15px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    aside strong {
+        margin-bottom: 12px;
+    }
+
+    aside a {
+        margin-bottom: 5px;
+        padding: 8px 10px;
+    }
+
+
+    /* Content */
+
+    section {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 17px;
+        margin-top: 25px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+
+    /* Feature cards 한 열 */
+
+    .feature-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .feature-card {
+        padding: 16px;
+    }
+
+    .feature-card h4 {
+        font-size: 16px;
+    }
+
+
+    /* Images */
+
+    img {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .image-description {
+        width: 100%;
+        font-size: 13px;
+    }
+
+
+    /* Email input + button 세로 배치 */
+
+    .email-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .email-form input,
+    .email-form button {
+        width: 100%;
+    }
+
+    .email-form button {
+        margin: 0;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+
+    footer {
+        padding: 25px 15px;
+        font-size: 13px;
+    }
+}
+
+
+/* =========================
+   Small mobile
+   390px 이하
+========================= */
+
+@media (max-width: 390px) {
+
+    header {
+        padding: 32px 15px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    header p {
+        font-size: 13px;
+    }
+
+    main {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    section {
+        padding: 20px 15px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    .feature-card {
+        padding: 14px;
+    }
+
+    .feature-card p {
+        font-size: 13px;
+    }
+
+    .image-description {
+        font-size: 12px;
+    }
+
+    form {
+        padding: 12px;
+    }
 }
