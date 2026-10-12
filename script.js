@@ -1,6 +1,6 @@
-
 const feedbackForm = document.querySelector("#feedback-form");
 const emailInput = document.querySelector("#email");
+const opinionInput = document.querySelector("#opinion");
 const feedbackMessage = document.querySelector("#feedback-message");
 const submitButton = document.querySelector("#submit-button");
 
@@ -8,9 +8,10 @@ feedbackForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const email = emailInput.value.trim();
+    const opinion = opinionInput.value.trim();
 
-    if (email === "") {
-        feedbackMessage.textContent = "이메일을 입력해 주세요.";
+    if (email === "" || opinion === "") {
+        feedbackMessage.textContent = "이메일과 의견을 모두 입력해 주세요.";
         feedbackMessage.className = "feedback-error";
         return;
     }
@@ -22,14 +23,14 @@ feedbackForm.addEventListener("submit", function (event) {
     }
 
     feedbackMessage.textContent =
-        "입력이 완료되었습니다. 실제 이메일은 전송되지 않습니다.";
+        "입력이 완료되었습니다. 실제로 저장되지는 않습니다.";
     feedbackMessage.className = "feedback-success";
 
     submitButton.textContent = "입력 완료";
     submitButton.disabled = true;
 });
 
-emailInput.addEventListener("input", function () {
+feedbackForm.addEventListener("input", function () {
     feedbackMessage.textContent = "";
     feedbackMessage.className = "";
     submitButton.textContent = "제출";

@@ -47,15 +47,15 @@
                     기본적인 진행 방법과 필요한 정보를 쉽게 확인할 수 있습니다.
                 </p>
 
-                    class="image-link">
-                    <img src="images/any.png" alt="랜덤시드 Any% 플레이 화면(dwoh)">
+                class="image-link">
+                <img src="images/any.png" alt="랜덤시드 Any% 플레이 화면(dwoh)">
 
                 <p class="image-description">
                     무작위로 생성된 시드에서 엔딩 크레딧을 빠르게 띄우는 RSG Any% (dwoh)
                 </p>
 
-                    class="image-link">
-                    <img src="images/inv.png" alt="셋시드 인벤토리 다 채우기 플레이 화면(galaxy1010_w)">
+                class="image-link">
+                <img src="images/inv.png" alt="셋시드 인벤토리 다 채우기 플레이 화면(galaxy1010_w)">
 
                 <p class="image-description">
                     정해둔 시드에서 보관함 칸을 빠르게 채우는 SSG Full Inventory (galaxy1010_w)
@@ -171,14 +171,12 @@
 
                 <form id="feedback-form" novalidate>
                     <label for="email">이메일</label>
+                    <input type="email" id="email" placeholder="이메일을 입력하세요">
 
-                    <div class="email-form">
-                        <input type="email" id="email" placeholder="이메일을 입력하세요" required>
+                    <label for="opinion">의견</label>
+                    <textarea id="opinion" placeholder="의견을 입력하세요"></textarea>
 
-                        <button type="submit" id="submit-button">
-                            제출
-                        </button>
-                    </div>
+                    <button type="submit" id="submit-button">제출</button>
 
                     <p id="feedback-message" role="status" aria-live="polite"></p>
                 </form>
