@@ -47,19 +47,21 @@
                     기본적인 진행 방법과 필요한 정보를 쉽게 확인할 수 있습니다.
                 </p>
 
-                <img src="images/any.png" alt="랜덤시드 Any% 플레이 화면(제공: dwoh)">
+                    class="image-link">
+                    <img src="images/any.png" alt="랜덤시드 Any% 플레이 화면(dwoh)">
 
                 <p class="image-description">
-                    무작위로 생성된 시드에서 엔딩 크레딧을 빠르게 띄우는 RSG Any%(제공: dwoh)
+                    무작위로 생성된 시드에서 엔딩 크레딧을 빠르게 띄우는 RSG Any% (dwoh)
                 </p>
 
-                <img src="images/inv.png" alt="셋시드 인벤토리 다 채우기 플레이 화면(제공: galaxy1010_w)">
+                    class="image-link">
+                    <img src="images/inv.png" alt="셋시드 인벤토리 다 채우기 플레이 화면(galaxy1010_w)">
 
                 <p class="image-description">
-                    정해둔 시드에서 보관함 칸을 빠르게 채우는 SSG Full Inventory(제공: galaxy1010_w)
+                    정해둔 시드에서 보관함 칸을 빠르게 채우는 SSG Full Inventory (galaxy1010_w)
                 </p>
+
             </section>
-
 
             <section id="features">
                 <h2>스피드런의 흐름</h2>
@@ -76,7 +78,6 @@
                     그 외에도 인벤토리(보관함) 다 채우기, 모든 색상 양털 모으기 등
                     다양한 분야가 있습니다.
                 </p>
-
 
                 <h3>Any% Glitchless 진행 과정(인기종목)</h3>
 
@@ -132,7 +133,6 @@
 
                 </div>
 
-
                 <h3>초보자 팁</h3>
 
                 <p>
@@ -140,9 +140,7 @@
                     기술들과 미리 알고 있어야 할 정보들을 충분히 숙지한 후
                     파트별로 연습합니다.
                 </p>
-
             </section>
-
 
             <section id="steps">
                 <h2>플레이 방법</h2>
@@ -165,23 +163,24 @@
                     바스티온 라우트 등 자신이 연습해야 할 부분을
                     먼저 부분별로 나눠 연습합니다.
                 </p>
-
             </section>
-
 
             <section id="feedback">
                 <h2>의견 남기기</h2>
-
                 <p>페이지에 대한 의견을 남겨주세요.</p>
 
-                <form>
+                <form id="feedback-form" novalidate>
                     <label for="email">이메일</label>
 
                     <div class="email-form">
-                        <input type="email" id="email" placeholder="이메일을 입력하세요">
+                        <input type="email" id="email" placeholder="이메일을 입력하세요" required>
 
-                        <button type="submit">제출</button>
+                        <button type="submit" id="submit-button">
+                            제출
+                        </button>
                     </div>
+
+                    <p id="feedback-message" role="status" aria-live="polite"></p>
                 </form>
             </section>
 
@@ -189,11 +188,11 @@
 
     </main>
 
-
     <footer>
         <small>© 2026 마인크래프트 스피드런 가이드</small>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 
 </html>
