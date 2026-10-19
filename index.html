@@ -23,7 +23,6 @@
     </header>
 
     <main>
-
         <aside>
             <strong>CONTENTS</strong>
             <a href="#about">소개: 스피드런에 대해</a>
@@ -58,109 +57,155 @@
                 <p class="image-description">
                     정해둔 시드에서 보관함 칸을 빠르게 채우는 SSG Full Inventory (galaxy1010_w)
                 </p>
-
             </section>
 
             <section id="features">
                 <h2>스피드런의 흐름</h2>
 
-                <h3>스피드런 기본 정보</h3>
+                <div class="speedrun-tabs" role="tablist" aria-label="스피드런 정보">
+                    <button type="button" class="speedrun-tab active"
+                        id="tab-info" role="tab" aria-selected="true"
+                        aria-controls="panel-info" data-tab="info">
+                        스피드런 기본 정보
+                    </button>
 
-                <p>
-                    스피드런은 다양한 종목들이 있으며, 저마다 규칙이 조금씩 다릅니다.
-                    가장 인기 있는 종목은 Any%로, 마인크래프트의 최종 보스인 엔더 드래곤을
-                    잡은 후 나타나는 엔딩 크레딧을 빠르게 보는 것이 목표입니다.
-                </p>
+                    <button type="button" class="speedrun-tab"
+                        id="tab-flow" role="tab" aria-selected="false"
+                        aria-controls="panel-flow" data-tab="flow" tabindex="-1">
+                        진행 과정
+                    </button>
 
-                <p>
-                    그 외에도 인벤토리(보관함) 다 채우기, 모든 색상 양털 모으기 등
-                    다양한 분야가 있습니다.
-                </p>
-
-                <h3>Any% Glitchless 진행 과정(인기종목)</h3>
-
-                <div class="feature-list">
-
-                    <div class="feature-card">
-                        <h4>오버월드</h4>
-                        <p>
-                            도구와 네더 차원에 입장하기 위한 포탈을 제작할
-                            재료를 모아서 네더에 입장합니다.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>바스티온</h4>
-                        <p>
-                            가까이에 있는 바스티온으로 이동하여 피글린과 거래해
-                            필요한 아이템을 얻습니다.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>포트리스</h4>
-                        <p>
-                            바스티온과 가장 가까운 포트리스를 찾고
-                            블레이즈를 잡아 필요한 재료를 얻습니다.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>블라인드</h4>
-                        <p>
-                            오버월드로 돌아와 엔더유적의 위치를 계산하고
-                            빠르게 이동합니다.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>엔드 포탈</h4>
-                        <p>
-                            엔더의 눈을 제작하여 엔드 포탈을 활성화하고
-                            엔드 차원으로 이동합니다.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>엔드</h4>
-                        <p>
-                            드래곤을 처치하고 엔딩 크레딧을 띄우면
-                            스피드런을 완료합니다.
-                        </p>
-                    </div>
-
+                    <button type="button" class="speedrun-tab"
+                        id="tab-tips" role="tab" aria-selected="false"
+                        aria-controls="panel-tips" data-tab="tips" tabindex="-1">
+                        초보자 팁
+                    </button>
                 </div>
 
-                <h3>초보자 팁</h3>
+                <div class="tab-panel" id="panel-info"
+                    role="tabpanel" aria-labelledby="tab-info">
 
-                <p>
-                    무작정 빠르게만 하려고 하면 실수하거나 막히는 경우가 많으므로,
-                    기술들과 미리 알고 있어야 할 정보들을 충분히 숙지한 후
-                    파트별로 연습합니다.
-                </p>
+                    <h3>스피드런 기본 정보</h3>
+
+                    <p>
+                        스피드런은 다양한 종목들이 있으며, 저마다 규칙이 조금씩 다릅니다.
+                        가장 인기 있는 종목은 Any%로, 마인크래프트의 최종 보스인 엔더 드래곤을
+                        잡은 후 나타나는 엔딩 크레딧을 빠르게 보는 것이 목표입니다.
+                    </p>
+
+                    <p>
+                        그 외에도 인벤토리(보관함) 다 채우기, 모든 색상 양털 모으기 등
+                        다양한 분야가 있습니다.
+                    </p>
+                </div>
+
+                <div class="tab-panel" id="panel-flow"
+                    role="tabpanel" aria-labelledby="tab-flow" hidden>
+
+                    <h3>Any% Glitchless 진행 과정(인기종목)</h3>
+
+                    <div class="feature-list">
+
+                        <div class="feature-card">
+                            <h4>오버월드</h4>
+                            <p>
+                                도구와 네더 차원에 입장하기 위한 포탈을 제작할
+                                재료를 모아서 네더에 입장합니다.
+                            </p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4>바스티온</h4>
+                            <p>
+                                가까이에 있는 바스티온으로 이동하여 피글린과 거래해
+                                필요한 아이템을 얻습니다.
+                            </p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4>포트리스</h4>
+                            <p>
+                                바스티온과 가장 가까운 포트리스를 찾고
+                                블레이즈를 잡아 필요한 재료를 얻습니다.
+                            </p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4>블라인드</h4>
+                            <p>
+                                오버월드로 돌아와 엔더유적의 위치를 계산하고
+                                빠르게 이동합니다.
+                            </p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4>엔드 포탈</h4>
+                            <p>
+                                엔더의 눈을 제작하여 엔드 포탈을 활성화하고
+                                엔드 차원으로 이동합니다.
+                            </p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4>엔드</h4>
+                            <p>
+                                드래곤을 처치하고 엔딩 크레딧을 띄우면
+                                스피드런을 완료합니다.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="panel-tips"
+                    role="tabpanel" aria-labelledby="tab-tips" hidden>
+
+                    <h3>초보자 팁</h3>
+
+                    <p>
+                        무작정 빠르게만 하려고 하면 실수하거나 막히는 경우가 많으므로,
+                        기술들과 미리 알고 있어야 할 정보들을 충분히 숙지한 후
+                        파트별로 연습합니다.
+                    </p>
+                </div>
             </section>
 
             <section id="steps">
                 <h2>플레이 방법</h2>
 
-                <h3>1. 기본 정보 확인하기</h3>
+                <label for="speedrun-type">연습할 스피드런 종목</label>
+                <select id="speedrun-type">
+                    <option value="rsg">RSG Any%</option>
+                    <option value="ssg">SSG Full Inventory</option>
+                </select>
 
-                <p>
-                    먼저 자신이 하고 싶은 스피드런 종목과 규칙을 확인합니다.
+                <p id="speedrun-description" aria-live="polite">
+                    무작위로 생성된 시드에서 엔더 드래곤을 처치하고 엔딩 크레딧을 띄우는 종목입니다.
                 </p>
 
-                <h3>2. 진행 과정 알아보기</h3>
+                <ol>
+                    <li>
+                        <h3>1. 기본 정보 확인하기</h3>
+                        <p>
+                            먼저 자신이 하고 싶은 스피드런 종목과 규칙을 확인합니다.
+                        </p>
+                    </li>
 
-                <p>
-                    스피드런이 어떤 순서로 진행되는지 확인합니다.
-                </p>
+                    <li>
+                        <h3>2. 진행 과정 알아보기</h3>
+                        <p>
+                            스피드런이 어떤 순서로 진행되는지 확인합니다.
+                        </p>
+                    </li>
 
-                <h3>3. 직접 플레이하기</h3>
-
-                <p>
-                    바스티온 라우트 등 자신이 연습해야 할 부분을
-                    먼저 부분별로 나눠 연습합니다.
-                </p>
+                    <li>
+                        <h3>3. 직접 플레이하기</h3>
+                        <p>
+                            바스티온 라우트 등 자신이 연습해야 할 부분을
+                            먼저 부분별로 나눠 연습합니다.
+                        </p>
+                    </li>
+                </ol>
             </section>
 
             <section id="feedback">
@@ -169,10 +214,17 @@
 
                 <form id="feedback-form" novalidate>
                     <label for="email">이메일</label>
-                    <input type="email" id="email" placeholder="이메일을 입력하세요">
+                    <input type="email" id="email"
+                        placeholder="이메일을 입력하세요"
+                        aria-describedby="feedback-message">
 
                     <label for="opinion">의견</label>
-                    <textarea id="opinion" placeholder="의견을 입력하세요"></textarea>
+                    <textarea id="opinion"
+                        placeholder="의견을 입력하세요"
+                        rows="4"
+                        aria-describedby="opinion-count feedback-message"></textarea>
+
+                    <p id="opinion-count" aria-live="polite">0자 입력</p>
 
                     <button type="submit" id="submit-button">제출</button>
 
@@ -181,7 +233,6 @@
             </section>
 
         </div>
-
     </main>
 
     <footer>

@@ -14,10 +14,7 @@ body {
     overflow-x: hidden;
 }
 
-
-/* =========================
-   Header
-========================= */
+/* Header */
 
 header {
     background-color: #111c27;
@@ -38,10 +35,7 @@ header p {
     line-height: 1.6;
 }
 
-
-/* =========================
-   Main
-========================= */
+/* Main */
 
 main {
     width: 90%;
@@ -52,10 +46,11 @@ main {
     gap: 40px;
 }
 
+.content {
+    min-width: 0;
+}
 
-/* =========================
-   Contents Navigation
-========================= */
+/* Navigation */
 
 aside {
     padding: 25px 10px;
@@ -89,10 +84,7 @@ aside a:hover {
     color: #d9e8f2;
 }
 
-
-/* =========================
-   Content
-========================= */
+/* Content */
 
 section {
     width: 100%;
@@ -102,10 +94,7 @@ section {
     padding: 35px 40px;
     border: 1px solid #29485d;
     border-radius: 14px;
-}
-
-section:first-child {
-    margin-top: 0;
+    scroll-margin-top: 20px;
 }
 
 h2 {
@@ -126,12 +115,10 @@ h3 {
 p {
     font-size: 16px;
     line-height: 1.8;
+    overflow-wrap: anywhere;
 }
 
-
-/* =========================
-   Images
-========================= */
+/* Images */
 
 img {
     display: block;
@@ -141,12 +128,6 @@ img {
     margin-top: 25px;
     border: 1px solid #29485d;
     border-radius: 10px;
-
-    transition: transform 0.35s ease;
-}
-
-img:hover {
-    transform: scale(1.06);
 }
 
 .image-description {
@@ -162,10 +143,46 @@ img:hover {
     line-height: 1.5;
 }
 
+/* Tabs */
 
-/* =========================
-   Feature Cards
-========================= */
+.speedrun-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.speedrun-tab {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 10px;
+    background-color: #172b3d;
+    color: #8fb3ca;
+    border: 1px solid #29485d;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: normal;
+}
+
+.speedrun-tab:hover {
+    background-color: #21445e;
+}
+
+.speedrun-tab.active {
+    background-color: #286f9f;
+    color: #ffffff;
+    border-color: #65b9e8;
+}
+
+.tab-panel {
+    min-width: 0;
+}
+
+.tab-panel[hidden] {
+    display: none;
+}
+
+/* Feature Cards */
 
 .feature-list {
     width: 100%;
@@ -196,10 +213,53 @@ img:hover {
     line-height: 1.7;
 }
 
+/* Steps */
 
-/* =========================
-   Email Form
-========================= */
+#steps label {
+    display: block;
+    margin-bottom: 10px;
+    color: #8fb3ca;
+    font-size: 14px;
+}
+
+#speedrun-type {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    padding: 10px;
+    background-color: #0b1117;
+    color: #d9e8f2;
+    border: 1px solid #326d94;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#speedrun-description {
+    margin: 15px 0 25px;
+    padding: 12px;
+    background-color: #172b3d;
+    border-radius: 6px;
+}
+
+#steps ol {
+    padding-left: 24px;
+}
+
+#steps li {
+    margin-bottom: 18px;
+    line-height: 1.7;
+}
+
+#steps li h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+#steps li p {
+    margin: 0;
+}
+
+/* Feedback Form */
 
 form {
     margin-top: 25px;
@@ -211,35 +271,9 @@ form {
 
 form label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-size: 14px;
     color: #8fb3ca;
-}
-
-.email-form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.email-form textarea {
-    flex: 1;
-    min-width: 0;
-    min-height: 100px;
-    padding: 10px;
-    resize: vertical;
-    background-color: #0b1117;
-    color: #d9e8f2;
-    border: 1px solid #326d94;
-    border-radius: 6px;
-    font-family: Arial, sans-serif;
-}
-
-.email-form input,
-.email-form textarea,
-.email-form button {
-    width: 100%;
 }
 
 #feedback-form {
@@ -251,7 +285,7 @@ form label {
 #feedback-form input,
 #feedback-form textarea {
     width: 100%;
-    box-sizing: border-box;
+    min-width: 0;
     padding: 10px;
     background-color: #0b1117;
     color: #d9e8f2;
@@ -261,33 +295,25 @@ form label {
     font-size: 14px;
 }
 
+#feedback-form input {
+    min-height: 40px;
+}
+
 #feedback-form textarea {
     height: 100px;
     resize: vertical;
+    line-height: 1.6;
 }
 
-#feedback-form button {
-    align-self: flex-start;
-}
-
-@media (max-width: 768px) {
-    #feedback-form button {
-        width: 100%;
-    }
-}
-
-input {
-    flex: 1;
-    min-width: 0;
-    padding: 10px;
-    background-color: #0b1117;
-    color: #d9e8f2;
-    border: 1px solid #326d94;
-    border-radius: 6px;
-}
-
-input::placeholder {
+#feedback-form input::placeholder,
+#feedback-form textarea::placeholder {
     color: #61798a;
+}
+
+#opinion-count {
+    margin: 0;
+    color: #8fb3ca;
+    font-size: 13px;
 }
 
 button {
@@ -297,17 +323,45 @@ button {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    white-space: nowrap;
+    white-space: normal;
 }
 
 button:hover {
     background-color: #358bc1;
 }
 
+#submit-button {
+    align-self: flex-start;
+    margin-top: 8px;
+}
 
-/* =========================
-   Footer
-========================= */
+button:disabled {
+    background-color: #426477;
+    color: #d9e8f2;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+#feedback-message {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+#feedback-message:empty {
+    display: none;
+}
+
+.feedback-error {
+    color: #ff8585;
+}
+
+.feedback-success {
+    color: #83e6a0;
+}
+
+/* Footer */
 
 footer {
     text-align: center;
@@ -315,14 +369,9 @@ footer {
     color: #7192a8;
 }
 
-
-/* =========================
-   Responsive
-   768px 이하
-========================= */
+/* Responsive: 768px 이하 */
 
 @media (max-width: 768px) {
-
     header {
         padding: 40px 20px;
     }
@@ -334,9 +383,6 @@ footer {
     header p {
         font-size: 14px;
     }
-
-
-    /* Navigation 세로 배치 */
 
     main {
         width: 92%;
@@ -363,9 +409,6 @@ footer {
         padding: 8px 10px;
     }
 
-
-    /* Content */
-
     section {
         padding: 25px 20px;
         margin-bottom: 20px;
@@ -386,9 +429,6 @@ footer {
         line-height: 1.7;
     }
 
-
-    /* Feature cards 한 열 */
-
     .feature-list {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -402,9 +442,6 @@ footer {
         font-size: 16px;
     }
 
-
-    /* Images */
-
     img {
         width: 100%;
         max-width: 100%;
@@ -415,27 +452,14 @@ footer {
         font-size: 13px;
     }
 
-
-    /* Email input + button 세로 배치 */
-
-    .email-form {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .email-form input,
-    .email-form button {
-        width: 100%;
-    }
-
-    .email-form button {
-        margin: 0;
-    }
-
     form {
         padding: 15px;
     }
 
+    #submit-button {
+        width: 100%;
+        align-self: stretch;
+    }
 
     footer {
         padding: 25px 15px;
@@ -443,14 +467,9 @@ footer {
     }
 }
 
-
-/* =========================
-   Small mobile
-   390px 이하
-========================= */
+/* Small mobile: 390px 이하 */
 
 @media (max-width: 390px) {
-
     header {
         padding: 32px 15px;
     }
@@ -485,6 +504,15 @@ footer {
         font-size: 13px;
     }
 
+    .speedrun-tabs {
+        gap: 5px;
+    }
+
+    .speedrun-tab {
+        padding: 10px 5px;
+        font-size: 12px;
+    }
+
     .feature-card {
         padding: 14px;
     }
@@ -502,29 +530,11 @@ footer {
     }
 }
 
-
-#feedback-message {
-    margin: 12px 0 0;
-    font-size: 14px;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-}
-
-#feedback-message:empty {
-    display: none;
-}
-
-.feedback-error {
-    color: #ff8585;
-}
-
-.feedback-success {
-    color: #83e6a0;
-}
-
-button:disabled {
-    background-color: #426477;
-    color: #d9e8f2;
-    cursor: not-allowed;
-    opacity: 0.8;
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid #78c5ef;
+    outline-offset: 3px;
 }
