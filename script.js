@@ -19,6 +19,13 @@ const flowConfirm = document.querySelector("#flow-confirm");
 const flowComplete = document.querySelector("#flow-complete");
 const flowError = document.querySelector("#flow-error");
 
+const savePlanButton = document.querySelector("#save-plan-button");
+const savePlanMessage = document.querySelector("#save-plan-message");
+const planList = document.querySelector("#plan-list");
+const planCount = document.querySelector("#plan-count");
+const planEmpty = document.querySelector("#plan-empty");
+const planMessage = document.querySelector("#plan-message");
+
 const typeNames = {
     "rsg-any": "RSG Any%",
     "ssg-any": "SSG Any%",
@@ -42,6 +49,53 @@ const descriptions = {
     "ssg-wool": "정해진 시드에서 모든 색상의 양털을 모으는 종목입니다.",
     "rsg-advancements": "무작위 시드에서 모든 발전 과제를 달성하는 종목입니다."
 };
+
+const experienceNames = {
+    beginner: "처음 시작함",
+    practice: "기본적인 플레이 경험이 있음"
+};
+
+const STORAGE_KEY = "minecraftSpeedrunPracticePlans";
+
+// 저장된 계획 불러오기
+function loadPlans() {
+    try {
+        const savedPlans = localStorage.getItem(STORAGE_KEY);
+
+        if (!savedPlans) {
+            return [];
+        }
+
+        const plans = JSON.parse(savedPlans);
+
+        if (!Array.isArray(plans)) {
+            return [];
+        }
+
+        return plans.filter(function (plan) {
+            return plan &&
+                typeof plan.id === "string" &&
+                typeNames[plan.type] &&
+                typeof plan.version === "string" &&
+                (versionOptions[plan.type] || []).includes(plan.version) &&
+                experienceNames[plan.experience];
+        });
+    } catch (error) {
+        return [];
+    }
+}
+
+let practicePlans = loadPlans();
+
+// 저장된 계획을 브라우저에 기록
+function savePlans() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(practicePlans));
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
 
 // 탭 전환
 tabs.forEach(function (tab) {
@@ -134,15 +188,11 @@ document.querySelector("#flow-next-button").addEventListener("click", function (
         return;
     }
 
-    const experienceName = experience === "beginner"
-        ? "처음 시작함"
-        : "기본적인 플레이 경험이 있음";
-
     document.querySelector("#confirm-type").textContent =
         "선택한 종목: " + typeNames[type];
 
     document.querySelector("#confirm-experience").textContent =
-        "현재 숙련도: " + experienceName;
+        "현재 숙련도: " + experienceNames[experience];
 
     document.querySelector("#confirm-version").textContent =
         "마인크래프트 버전: " + version;
@@ -186,7 +236,7 @@ document.querySelector("#flow-complete-button").addEventListener("click", functi
     }
 
     document.querySelector("#complete-guide").textContent = guide;
-
+    savePlanMessage.textContent = "";
     showFlowStep("complete");
 });
 
@@ -205,7 +255,167 @@ document.querySelector("#flow-restart-button").addEventListener("click", functio
     document.querySelector("#complete-result").textContent = "";
     document.querySelector("#complete-guide").textContent = "";
 
+    savePlanMessage.textContent = "";
+
     showFlowStep("start");
+});
+
+// 연습 계획 목록 표시
+function renderPlans() {
+    planList.replaceChildren();
+
+    planCount.textContent = "저장된 계획: " + practicePlans.length + "개";
+    planEmpty.hidden = practicePlans.length !== 0;
+
+    practicePlans.forEach(function (plan) {
+        const card = document.createElement("article");
+        card.className = "plan-card";
+
+        const title = document.createElement("h4");
+        title.textContent = typeNames[plan.type];
+
+        const version = document.createElement("p");
+        version.textContent = "마인크래프트 버전: " + plan.version;
+
+        const experience = document.createElement("p");
+        experience.textContent = "숙련도: " + experienceNames[plan.experience];
+
+        const actions = document.createElement("div");
+        actions.className = "plan-actions";
+
+        const loadButton = document.createElement("button");
+        loadButton.type = "button";
+        loadButton.textContent = "불러오기";
+        loadButton.className = "load-plan-button";
+        loadButton.dataset.id = plan.id;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "삭제";
+        deleteButton.className = "delete-plan-button";
+        deleteButton.dataset.id = plan.id;
+
+        actions.append(loadButton, deleteButton);
+        card.append(title, version, experience, actions);
+        planList.appendChild(card);
+    });
+}
+
+// 연습 계획 저장
+savePlanButton.addEventListener("click", function () {
+    const type = speedrunType.value;
+    const version = minecraftVersion.value;
+    const experience = experienceInput.value;
+
+    if (!type || !version || !experience) {
+        savePlanMessage.textContent = "저장할 연습 정보를 먼저 선택해 주세요.";
+        savePlanMessage.className = "feedback-error";
+        return;
+    }
+
+    const duplicate = practicePlans.some(function (plan) {
+        return plan.type === type &&
+            plan.version === version &&
+            plan.experience === experience;
+    });
+
+    if (duplicate) {
+        savePlanMessage.textContent = "같은 종목, 버전, 숙련도의 계획이 이미 저장되어 있습니다.";
+        savePlanMessage.className = "feedback-error";
+        return;
+    }
+
+    const newPlan = {
+        id: Date.now().toString() + "-" + Math.random().toString(36).slice(2),
+        type: type,
+        version: version,
+        experience: experience
+    };
+
+    practicePlans.push(newPlan);
+
+    if (!savePlans()) {
+        practicePlans.pop();
+        savePlanMessage.textContent =
+            "저장에 실패했습니다. 브라우저의 저장 공간을 확인해 주세요.";
+        savePlanMessage.className = "feedback-error";
+        return;
+    }
+
+    renderPlans();
+
+    savePlanMessage.textContent = "연습 계획을 목록에 저장했습니다.";
+    savePlanMessage.className = "feedback-success";
+    planMessage.textContent = "";
+});
+
+// 목록에서 불러오기 및 삭제
+planList.addEventListener("click", function (event) {
+    const button = event.target.closest("button");
+
+    if (!button) {
+        return;
+    }
+
+    const planId = button.dataset.id;
+    const plan = practicePlans.find(function (item) {
+        return item.id === planId;
+    });
+
+    if (!plan) {
+        planMessage.textContent = "해당 계획을 찾을 수 없습니다. 목록을 확인해 주세요.";
+        planMessage.className = "feedback-error";
+        return;
+    }
+
+    // 계획 불러오기
+    if (button.classList.contains("load-plan-button")) {
+        speedrunType.value = plan.type;
+        updateVersions();
+
+        minecraftVersion.value = plan.version;
+        experienceInput.value = plan.experience;
+
+        speedrunDescription.textContent = descriptions[plan.type];
+        flowError.textContent = "";
+        savePlanMessage.textContent = "";
+
+        showFlowStep("select");
+
+        document.querySelector("#steps").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        planMessage.textContent = "저장한 계획을 불러왔습니다. 내용을 확인하거나 수정할 수 있습니다.";
+        planMessage.className = "feedback-success";
+        return;
+    }
+
+    // 계획 삭제
+    if (button.classList.contains("delete-plan-button")) {
+        const index = practicePlans.findIndex(function (item) {
+            return item.id === planId;
+        });
+
+        const deletedPlan = practicePlans[index];
+
+        practicePlans.splice(index, 1);
+
+        if (!savePlans()) {
+            practicePlans.splice(index, 0, deletedPlan);
+            planMessage.textContent =
+                "삭제 내용을 저장하지 못했습니다. 다시 시도해 주세요.";
+            planMessage.className = "feedback-error";
+            return;
+        }
+
+        renderPlans();
+
+        planMessage.textContent = "연습 계획을 삭제했습니다.";
+        planMessage.className = "feedback-success";
+        savePlanMessage.textContent = "";
+    }
 });
 
 // 의견 입력 상태 초기화
@@ -263,3 +473,6 @@ feedbackForm.addEventListener("submit", function (event) {
     submitButton.textContent = "입력 완료";
     submitButton.disabled = true;
 });
+
+// 페이지를 열 때 저장된 계획 표시
+renderPlans();

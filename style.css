@@ -1,560 +1,779 @@
+/* =========================
+   기본 설정
+========================= */
+
 * {
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 24px;
 }
 
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #0b1117;
-    color: #d9e8f2;
-    overflow-x: hidden;
+    background: #edf4fc;
+    color: #26384d;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+    overflow-wrap: break-word;
 }
 
-/* Header */
-
-header {
-    background-color: #111c27;
-    padding: 55px 30px;
-    text-align: center;
-    border-bottom: 1px solid #29485d;
+button,
+input,
+textarea,
+select {
+    font: inherit;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 36px;
-    color: #e8f5ff;
+button {
+    cursor: pointer;
 }
-
-header p {
-    margin-top: 15px;
-    color: #8fb3ca;
-    line-height: 1.6;
-}
-
-/* Main */
-
-main {
-    width: 90%;
-    max-width: 1000px;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: 170px minmax(0, 1fr);
-    gap: 40px;
-}
-
-.content {
-    min-width: 0;
-}
-
-/* Navigation */
-
-aside {
-    padding: 25px 10px;
-    position: sticky;
-    top: 25px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-}
-
-aside strong {
-    display: block;
-    margin-bottom: 25px;
-    color: #65b9e8;
-    font-size: 14px;
-    letter-spacing: 1px;
-}
-
-aside a {
-    display: block;
-    margin-bottom: 12px;
-    padding: 8px 10px;
-    color: #7192a8;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 6px;
-}
-
-aside a:hover {
-    background-color: #172b3d;
-    color: #d9e8f2;
-}
-
-/* Content */
-
-section {
-    width: 100%;
-    max-width: 100%;
-    background-color: #111c27;
-    margin-bottom: 28px;
-    padding: 35px 40px;
-    border: 1px solid #29485d;
-    border-radius: 14px;
-    scroll-margin-top: 20px;
-}
-
-h2 {
-    margin-top: 0;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    font-size: 26px;
-    color: #65b9e8;
-    border-bottom: 1px solid #29485d;
-}
-
-h3 {
-    margin-top: 30px;
-    font-size: 19px;
-    color: #78c5ef;
-}
-
-p {
-    font-size: 16px;
-    line-height: 1.8;
-    overflow-wrap: anywhere;
-}
-
-/* Images */
 
 img {
     display: block;
-    width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     height: auto;
-    margin-top: 25px;
-    border: 1px solid #29485d;
-    border-radius: 10px;
+}
+
+/* =========================
+   상단 헤더
+========================= */
+
+header {
+    padding: 42px 24px 36px;
+    text-align: center;
+    background: linear-gradient(135deg, #dceeff, #b8dcff);
+    border-bottom: 1px solid #c4def8;
+}
+
+.site-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0;
+    color: #174b82;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    line-height: 1.35;
+    overflow-wrap: normal;
+}
+
+.site-title span {
+    min-width: 0;
+}
+
+.title-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+header > p {
+    margin: 16px 0 0;
+    color: #3f6286;
+    font-size: 16px;
+}
+
+/* =========================
+   메인 레이아웃
+========================= */
+
+main {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 28px;
+    width: min(1200px, calc(100% - 40px));
+    margin: 32px auto;
+    align-items: start;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 0;
+}
+
+/* =========================
+   왼쪽 목차
+========================= */
+
+aside {
+    position: sticky;
+    top: 24px;
+    min-width: 0;
+    padding: 22px 16px;
+    background: #ffffff;
+    border: 1px solid #d8e6f5;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(42, 83, 130, 0.06);
+}
+
+aside h2 {
+    margin: 0 0 16px;
+    color: #3976b7;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+aside nav a {
+    display: block;
+    padding: 10px 12px;
+    color: #425b76;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 9px;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+aside nav a:hover {
+    background: #e8f2ff;
+    color: #1762b5;
+}
+
+/* =========================
+   공통 섹션
+========================= */
+
+section {
+    min-width: 0;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #dce7f4;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(42, 83, 130, 0.055);
+    scroll-margin-top: 24px;
+}
+
+section > h2 {
+    margin: 0 0 22px;
+    padding-bottom: 14px;
+    color: #215d99;
+    font-size: 25px;
+    line-height: 1.4;
+    border-bottom: 2px solid #dcecff;
+}
+
+section h3 {
+    margin-top: 0;
+    color: #2b649f;
+    font-size: 20px;
+}
+
+section p {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* =========================
+   소개 영역 이미지
+========================= */
+
+#about > img {
+    width: min(100%, 500px);
+    margin: 24px auto 8px;
+    border: 1px solid #d7e5f5;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(35, 75, 120, 0.08);
+    transition: transform 0.25s ease;
+}
+
+#about > img:hover {
+    transform: scale(1.02);
 }
 
 .image-description {
-    display: inline-block;
-    max-width: 100%;
-    margin-top: 10px;
-    padding: 8px 13px;
-    background-color: #172b3d;
-    color: #8dcef2;
-    border: 1px solid #28658e;
-    border-radius: 7px;
-    font-size: 14px;
-    line-height: 1.5;
+    margin: 0 0 24px;
+    color: #70839a;
+    text-align: center;
+    font-size: 13px;
 }
 
-/* Tabs */
+/* =========================
+   스피드런 정보 탭
+========================= */
 
 .speedrun-tabs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 20px 0;
+    gap: 10px;
+    margin: 24px 0 20px;
+    padding: 6px;
+    background: #e8f2ff;
+    border: 1px solid #c8def8;
+    border-radius: 14px;
 }
 
+/* 탭 버튼 기본 디자인 */
 .speedrun-tab {
     flex: 1;
     min-width: 0;
-    padding: 12px 10px;
-    background-color: #172b3d;
-    color: #8fb3ca;
-    border: 1px solid #29485d;
-    border-radius: 6px;
-    font-size: 14px;
-    white-space: normal;
+    padding: 14px 12px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: #426080;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
 
+/* 마우스를 올린 탭 */
 .speedrun-tab:hover {
-    background-color: #21445e;
+    background: #d5e8ff;
+    color: #174f91;
+    transform: translateY(-1px);
 }
 
-.speedrun-tab.active {
-    background-color: #286f9f;
-    color: #ffffff;
-    border-color: #65b9e8;
+/* 현재 선택된 탭 */
+.speedrun-tab.active,
+.speedrun-tab[aria-selected="true"] {
+    background: #ffffff;
+    color: #1762b5;
+    border-color: #b6d4fa;
+    box-shadow: 0 3px 8px rgba(39, 105, 180, 0.12);
+    font-weight: 700;
 }
 
+/* 키보드 포커스 */
+.speedrun-tab:focus-visible {
+    outline: 3px solid #80baff;
+    outline-offset: 3px;
+}
+
+/* 탭 내용 */
 .tab-panel {
-    min-width: 0;
+    padding: 24px;
+    background: #f7faff;
+    border: 1px solid #dce9f8;
+    border-radius: 14px;
 }
 
-.tab-panel[hidden],
-#steps [hidden] {
-    display: none !important;
+.tab-panel[hidden] {
+    display: none;
 }
 
-/* Feature Cards */
+.tab-panel h3 {
+    margin-bottom: 16px;
+}
+
+/* =========================
+   진행 과정 카드
+========================= */
 
 .feature-list {
-    width: 100%;
-    max-width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
     margin-top: 20px;
 }
 
 .feature-card {
     min-width: 0;
-    padding: 20px;
-    background-color: #172b3d;
-    border: 1px solid #29485d;
-    border-radius: 10px;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #d5e5f8;
+    border-radius: 12px;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-3px);
+    border-color: #9fc8f4;
+    box-shadow: 0 6px 16px rgba(39, 105, 180, 0.09);
 }
 
 .feature-card h4 {
-    margin: 0 0 10px;
-    color: #78c5ef;
+    margin: 0 0 8px;
+    color: #286db0;
     font-size: 17px;
 }
 
 .feature-card p {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-/* Steps and User Flow */
-
-#steps label {
-    display: block;
-    margin: 12px 0 8px;
-    color: #8fb3ca;
+    color: #536980;
     font-size: 14px;
 }
 
-#steps select {
-    display: block;
-    width: 100%;
-    max-width: 320px;
-    padding: 10px;
-    margin-bottom: 15px;
-    background-color: #0b1117;
-    color: #d9e8f2;
-    border: 1px solid #326d94;
-    border-radius: 6px;
-    font-size: 14px;
+/* =========================
+   플레이 방법 / 연습 과정
+========================= */
+
+#steps > div {
+    margin-top: 22px;
 }
 
-#steps select:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-}
-
-#speedrun-description {
-    margin: 15px 0 25px;
-    padding: 12px;
-    background-color: #172b3d;
-    border-radius: 6px;
-}
-
-#steps button {
-    margin: 5px 5px 5px 0;
-}
-
-#flow-error {
-    margin: 10px 0;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-#flow-error:empty {
+#steps > div[hidden] {
     display: none;
 }
 
-#flow-confirm p,
-#flow-complete p {
-    overflow-wrap: anywhere;
+#flow-start,
+#flow-select,
+#flow-confirm,
+#flow-complete,
+#practice-plans {
+    padding: 22px;
+    background: #f7faff;
+    border: 1px solid #dce9f8;
+    border-radius: 14px;
 }
 
-#flow-complete h3 {
-    color: #83e6a0;
+#steps h3 {
+    margin-bottom: 16px;
 }
 
-/* Feedback Form */
+#steps label,
+#feedback-form label {
+    display: block;
+    margin: 18px 0 8px;
+    color: #355875;
+    font-size: 14px;
+    font-weight: 700;
+}
 
-form {
-    margin-top: 25px;
-    padding: 20px;
-    background-color: #172b3d;
-    border: 1px solid #29485d;
+/* 선택 상자 */
+#steps select {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 11px 14px;
+    color: #2c435b;
+    background: #ffffff;
+    border: 1px solid #c8d9ec;
+    border-radius: 10px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#steps select:hover {
+    border-color: #8eb9e8;
+}
+
+#steps select:focus {
+    border-color: #4b94e5;
+    box-shadow: 0 0 0 3px rgba(75, 148, 229, 0.14);
+}
+
+#steps select:disabled {
+    color: #8b9bad;
+    background: #edf1f6;
+    cursor: not-allowed;
+}
+
+/* 종목 설명 */
+#speedrun-description {
+    margin: 12px 0 22px;
+    padding: 13px 15px;
+    color: #42678c;
+    background: #eaf4ff;
+    border-left: 4px solid #75aeea;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+/* =========================
+   공통 버튼
+========================= */
+
+#steps button,
+#feedback-form button,
+#save-plan-button,
+#plan-list button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin: 12px 8px 0 0;
+    padding: 11px 20px;
+    color: #ffffff;
+    background: #347fc7;
+    border: 1px solid #347fc7;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+#steps button:hover,
+#feedback-form button:hover,
+#save-plan-button:hover,
+#plan-list button:hover {
+    background: #2369ad;
+    border-color: #2369ad;
+    box-shadow: 0 4px 10px rgba(35, 105, 173, 0.18);
+    transform: translateY(-1px);
+}
+
+#steps button:focus-visible,
+#feedback-form button:focus-visible,
+#save-plan-button:focus-visible,
+#plan-list button:focus-visible {
+    outline: 3px solid #a7d0ff;
+    outline-offset: 3px;
+}
+
+#steps button:disabled,
+#feedback-form button:disabled,
+#save-plan-button:disabled,
+#plan-list button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 처음으로 / 이전 버튼 */
+#flow-cancel-button,
+#flow-back-button,
+#flow-restart-button {
+    color: #3c6388 !important;
+    background: #e7f0fa !important;
+    border-color: #cbdced !important;
+}
+
+#flow-cancel-button:hover,
+#flow-back-button:hover,
+#flow-restart-button:hover {
+    color: #214f7d !important;
+    background: #d7e8f9 !important;
+    border-color: #b5d1ef !important;
+    box-shadow: none !important;
+}
+
+/* =========================
+   연습 목록
+========================= */
+
+#practice-plans {
+    margin-top: 28px;
+}
+
+#practice-plans > h3 {
+    margin-bottom: 12px;
+}
+
+#plan-count {
+    display: inline-block;
+    margin: 4px 0 14px;
+    padding: 6px 12px;
+    color: #28649e;
+    background: #e4f1ff;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#plan-empty {
+    padding: 16px;
+    color: #78899c;
+    background: #ffffff;
+    border: 1px dashed #cbd9e8;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#plan-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#plan-list > div,
+#plan-list > article {
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #d5e5f5;
     border-radius: 10px;
 }
 
-form label {
-    display: block;
-    margin-bottom: 8px;
+#plan-message,
+#save-plan-message {
+    color: #35764e;
     font-size: 14px;
-    color: #8fb3ca;
 }
+
+/* =========================
+   의견 남기기
+========================= */
 
 #feedback-form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    align-items: stretch;
+}
+
+#feedback-form label {
+    margin-top: 18px;
 }
 
 #feedback-form input,
 #feedback-form textarea {
     width: 100%;
-    min-width: 0;
-    padding: 10px;
-    background-color: #0b1117;
-    color: #d9e8f2;
-    border: 1px solid #326d94;
-    border-radius: 6px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-}
-
-#feedback-form input {
-    min-height: 40px;
-}
-
-#feedback-form textarea {
-    height: 100px;
+    padding: 13px 14px;
+    color: #2c435b;
+    background: #fbfdff;
+    border: 1px solid #c8d9ec;
+    border-radius: 10px;
+    outline: none;
     resize: vertical;
-    line-height: 1.6;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+#feedback-form input:focus,
+#feedback-form textarea:focus {
+    background: #ffffff;
+    border-color: #4b94e5;
+    box-shadow: 0 0 0 3px rgba(75, 148, 229, 0.14);
 }
 
 #feedback-form input::placeholder,
 #feedback-form textarea::placeholder {
-    color: #61798a;
+    color: #91a2b5;
 }
 
 #opinion-count {
-    margin: 0;
-    color: #8fb3ca;
-    font-size: 13px;
+    margin: 8px 0 0;
+    color: #71849a;
+    text-align: right;
+    font-size: 12px;
 }
 
-button {
-    padding: 10px 18px;
-    background-color: #286f9f;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    white-space: normal;
-}
-
-button:hover {
-    background-color: #358bc1;
-}
-
-#submit-button {
+#feedback-form button {
     align-self: flex-start;
-    margin-top: 8px;
-}
-
-button:disabled {
-    background-color: #426477;
-    color: #d9e8f2;
-    cursor: not-allowed;
-    opacity: 0.8;
+    min-width: 120px;
+    margin-top: 18px;
 }
 
 #feedback-message {
-    margin: 8px 0 0;
+    margin-top: 12px;
     font-size: 14px;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-}
-
-#feedback-message:empty {
-    display: none;
 }
 
 .feedback-error {
-    color: #ff8585;
+    color: #c43e4b;
+    font-size: 14px;
 }
 
-.feedback-success {
-    color: #83e6a0;
-}
-
-/* Footer */
+/* =========================
+   하단
+========================= */
 
 footer {
+    padding: 28px 20px;
+    color: #71849a;
+    background: #e3edf8;
+    border-top: 1px solid #d3e1f0;
     text-align: center;
-    padding: 30px;
-    color: #7192a8;
+    font-size: 13px;
 }
 
-/* Responsive: 768px 이하 */
+/* =========================
+   태블릿
+========================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    main {
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 18px;
+        width: calc(100% - 32px);
+    }
+
+    aside {
+        padding: 18px 12px;
+    }
+
+    section {
+        padding: 24px;
+    }
+
+    .feature-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================
+   모바일
+========================= */
+
+@media (max-width: 650px) {
     header {
-        padding: 40px 20px;
+        padding: 30px 16px;
     }
 
-    header h1 {
-        font-size: 28px;
+    .site-title {
+        gap: 8px;
+        font-size: clamp(19px, 5vw, 28px);
     }
 
-    header p {
+    .title-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    header > p {
         font-size: 14px;
     }
 
     main {
-        width: 92%;
-        margin: 25px auto;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        width: calc(100% - 24px);
+        margin: 20px auto;
+        gap: 18px;
     }
 
     aside {
-        width: 100%;
         position: static;
-        padding: 15px 0;
-        display: flex;
-        flex-direction: column;
+        width: 100%;
+        padding: 18px;
     }
 
-    aside strong {
-        margin-bottom: 12px;
+    aside nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
     }
 
-    aside a {
-        margin-bottom: 5px;
-        padding: 8px 10px;
+    aside nav a {
+        padding: 9px;
+        background: #f5f9ff;
+        font-size: 13px;
+    }
+
+    .content {
+        width: 100%;
+        gap: 18px;
     }
 
     section {
-        padding: 25px 20px;
-        margin-bottom: 20px;
+        padding: 20px 16px;
+        border-radius: 14px;
     }
 
-    h2 {
-        font-size: 22px;
-        margin-bottom: 20px;
+    section > h2 {
+        font-size: 21px;
     }
 
-    h3 {
-        font-size: 17px;
-        margin-top: 25px;
+    section h3 {
+        font-size: 18px;
     }
 
-    p {
-        font-size: 14px;
-        line-height: 1.7;
+    .speedrun-tabs {
+        gap: 4px;
+        padding: 4px;
+    }
+
+    .speedrun-tab {
+        padding: 11px 5px;
+        font-size: 12px;
+        overflow-wrap: break-word;
+    }
+
+    .tab-panel {
+        padding: 18px 14px;
     }
 
     .feature-list {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 10px;
     }
 
     .feature-card {
-        padding: 16px;
-    }
-
-    .feature-card h4 {
-        font-size: 16px;
-    }
-
-    img {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .image-description {
-        width: 100%;
-        font-size: 13px;
-    }
-
-    form {
         padding: 15px;
     }
 
-    #steps select {
-        max-width: 100%;
+    #flow-start,
+    #flow-select,
+    #flow-confirm,
+    #flow-complete,
+    #practice-plans {
+        padding: 17px 14px;
     }
 
     #steps button,
-    #submit-button {
-        width: 100%;
-        align-self: stretch;
-        margin: 5px 0;
+    #feedback-form button,
+    #save-plan-button,
+    #plan-list button {
+        min-height: 42px;
+        padding: 10px 14px;
+        font-size: 13px;
     }
 
-    footer {
-        padding: 25px 15px;
-        font-size: 13px;
+    #feedback-form button {
+        width: 100%;
     }
 }
 
-/* Small mobile: 390px 이하 */
+/* =========================
+   작은 모바일 화면
+========================= */
 
-@media (max-width: 390px) {
-    header {
-        padding: 32px 15px;
-    }
-
-    header h1 {
-        font-size: 24px;
-    }
-
-    header p {
-        font-size: 13px;
-    }
-
-    main {
-        width: 94%;
-        margin: 20px auto;
-    }
-
-    section {
-        padding: 20px 15px;
-        border-radius: 10px;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
-
-    h3 {
-        font-size: 16px;
-    }
-
-    p {
-        font-size: 13px;
-    }
-
-    .speedrun-tabs {
+@media (max-width: 380px) {
+    .site-title {
         gap: 5px;
+        font-size: 18px;
+    }
+
+    .title-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    aside nav {
+        grid-template-columns: 1fr;
     }
 
     .speedrun-tab {
-        padding: 10px 5px;
-        font-size: 12px;
-    }
-
-    .feature-card {
-        padding: 14px;
-    }
-
-    .feature-card p {
-        font-size: 13px;
-    }
-
-    .image-description {
-        font-size: 12px;
-    }
-
-    form {
-        padding: 12px;
+        padding: 10px 3px;
+        font-size: 11px;
     }
 }
 
-/* Keyboard Focus */
+/* 애니메이션 최소화 설정 */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-    outline: 2px solid #78c5ef;
-    outline-offset: 3px;
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
