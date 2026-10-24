@@ -50,5 +50,5 @@
 - JavaScript
 
 ## 9. 배포 주소
-배포 웹페이지: 실제 배포 URL 입력
-GitHub 저장소: 실제 저장소 URL 입력
+배포 웹페이지: https://hielgldpf.github.io/uiuxprogramming/
+GitHub 저장소: https://github.com/HIELgldpf/uiuxprogramming
