@@ -178,8 +178,9 @@ img {
     min-width: 0;
 }
 
-.tab-panel[hidden] {
-    display: none;
+.tab-panel[hidden],
+#steps [hidden] {
+    display: none !important;
 }
 
 /* Feature Cards */
@@ -213,25 +214,31 @@ img {
     line-height: 1.7;
 }
 
-/* Steps */
+/* Steps and User Flow */
 
 #steps label {
     display: block;
-    margin-bottom: 10px;
+    margin: 12px 0 8px;
     color: #8fb3ca;
     font-size: 14px;
 }
 
-#speedrun-type {
+#steps select {
     display: block;
     width: 100%;
     max-width: 320px;
     padding: 10px;
+    margin-bottom: 15px;
     background-color: #0b1117;
     color: #d9e8f2;
     border: 1px solid #326d94;
     border-radius: 6px;
     font-size: 14px;
+}
+
+#steps select:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
 }
 
 #speedrun-description {
@@ -241,22 +248,27 @@ img {
     border-radius: 6px;
 }
 
-#steps ol {
-    padding-left: 24px;
+#steps button {
+    margin: 5px 5px 5px 0;
 }
 
-#steps li {
-    margin-bottom: 18px;
-    line-height: 1.7;
+#flow-error {
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-#steps li h3 {
-    margin-top: 20px;
-    margin-bottom: 8px;
+#flow-error:empty {
+    display: none;
 }
 
-#steps li p {
-    margin: 0;
+#flow-confirm p,
+#flow-complete p {
+    overflow-wrap: anywhere;
+}
+
+#flow-complete h3 {
+    color: #83e6a0;
 }
 
 /* Feedback Form */
@@ -456,9 +468,15 @@ footer {
         padding: 15px;
     }
 
+    #steps select {
+        max-width: 100%;
+    }
+
+    #steps button,
     #submit-button {
         width: 100%;
         align-self: stretch;
+        margin: 5px 0;
     }
 
     footer {
@@ -529,6 +547,8 @@ footer {
         padding: 12px;
     }
 }
+
+/* Keyboard Focus */
 
 button:focus-visible,
 a:focus-visible,
