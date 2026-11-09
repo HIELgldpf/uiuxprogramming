@@ -6,13 +6,6 @@ const speedrunDescription = document.querySelector("#speedrun-description");
 const minecraftVersion = document.querySelector("#minecraft-version");
 const experienceInput = document.querySelector("#experience");
 
-const feedbackForm = document.querySelector("#feedback-form");
-const emailInput = document.querySelector("#email");
-const opinionInput = document.querySelector("#opinion");
-const opinionCount = document.querySelector("#opinion-count");
-const feedbackMessage = document.querySelector("#feedback-message");
-const submitButton = document.querySelector("#submit-button");
-
 const flowStart = document.querySelector("#flow-start");
 const flowSelect = document.querySelector("#flow-select");
 const flowConfirm = document.querySelector("#flow-confirm");
@@ -320,7 +313,8 @@ savePlanButton.addEventListener("click", function () {
     });
 
     if (duplicate) {
-        savePlanMessage.textContent = "같은 종목, 버전, 숙련도의 계획이 이미 저장되어 있습니다.";
+        savePlanMessage.textContent =
+            "같은 종목, 버전, 숙련도의 계획이 이미 저장되어 있습니다.";
         savePlanMessage.className = "feedback-error";
         return;
     }
@@ -363,7 +357,8 @@ planList.addEventListener("click", function (event) {
     });
 
     if (!plan) {
-        planMessage.textContent = "해당 계획을 찾을 수 없습니다. 목록을 확인해 주세요.";
+        planMessage.textContent =
+            "해당 계획을 찾을 수 없습니다. 목록을 확인해 주세요.";
         planMessage.className = "feedback-error";
         return;
     }
@@ -387,7 +382,8 @@ planList.addEventListener("click", function (event) {
             block: "start"
         });
 
-        planMessage.textContent = "저장한 계획을 불러왔습니다. 내용을 확인하거나 수정할 수 있습니다.";
+        planMessage.textContent =
+            "저장한 계획을 불러왔습니다. 내용을 확인하거나 수정할 수 있습니다.";
         planMessage.className = "feedback-success";
         return;
     }
@@ -418,61 +414,288 @@ planList.addEventListener("click", function (event) {
     }
 });
 
-// 의견 입력 상태 초기화
-function resetFeedback() {
-    feedbackMessage.textContent = "";
-    feedbackMessage.className = "";
-    submitButton.textContent = "제출";
-    submitButton.disabled = false;
+// ======================================
+// 의견 남기기 폼 기능
+// ======================================
+
+const feedbackForm = document.querySelector("#feedback-form");
+const feedbackCategory = document.querySelector("#feedback-category");
+const opinionInput = document.querySelector("#opinion");
+const replyCheck = document.querySelector("#reply-check");
+const emailInput = document.querySelector("#feedback-email");
+const emailGroup = document.querySelector("#email-group");
+
+const opinionCount = document.querySelector("#opinion-count");
+const feedbackMessage = document.querySelector("#feedback-message");
+const submitButton = document.querySelector("#submit-button");
+
+const categoryError = document.querySelector("#category-error");
+const opinionError = document.querySelector("#opinion-error");
+const emailError = document.querySelector("#email-error");
+
+const feedbackList = document.querySelector("#feedback-list");
+const feedbackCount = document.querySelector("#feedback-count");
+
+const FEEDBACK_STORAGE_KEY = "minecraftSpeedrunFeedback";
+
+// 저장된 의견 불러오기
+function loadFeedbacks() {
+    try {
+        const saved = localStorage.getItem(FEEDBACK_STORAGE_KEY);
+
+        if (!saved) {
+            return [];
+        }
+
+        const feedbacks = JSON.parse(saved);
+
+        return Array.isArray(feedbacks) ? feedbacks : [];
+    } catch (error) {
+        return [];
+    }
 }
 
-// 이메일 입력
-emailInput.addEventListener("input", function () {
-    resetFeedback();
+// 오류 메시지 표시
+function showError(input, errorElement, message) {
+    errorElement.textContent = message;
+    input.setAttribute("aria-invalid", "true");
+}
+
+// 오류 메시지 제거
+function clearError(input, errorElement) {
+    errorElement.textContent = "";
+    input.removeAttribute("aria-invalid");
+}
+
+// 의견 글자 수 표시
+opinionInput.addEventListener("input", function () {
+    opinionCount.textContent = opinionInput.value.length + " / 300자";
+
+    const length = opinionInput.value.trim().length;
+
+    if (length >= 10 && length <= 300) {
+        clearError(opinionInput, opinionError);
+    }
+
+    feedbackMessage.textContent = "";
+    feedbackMessage.className = "";
 });
 
-// 의견 입력 및 글자 수 표시
-opinionInput.addEventListener("input", function () {
-    opinionCount.textContent = opinionInput.value.length + "자 입력";
-    resetFeedback();
+// 의견 유형 변경 시 오류 제거
+feedbackCategory.addEventListener("change", function () {
+    if (feedbackCategory.value !== "") {
+        clearError(feedbackCategory, categoryError);
+    }
+
+    feedbackMessage.textContent = "";
 });
+
+// 이메일 입력 시 오류 제거
+emailInput.addEventListener("input", function () {
+    if (emailInput.value.trim() !== "" && emailInput.validity.valid) {
+        clearError(emailInput, emailError);
+    }
+
+    feedbackMessage.textContent = "";
+});
+
+// 체크박스에 따른 이메일 입력 영역 표시
+replyCheck.addEventListener("change", function () {
+    const isChecked = replyCheck.checked;
+
+    emailGroup.hidden = !isChecked;
+    emailInput.disabled = !isChecked;
+    emailInput.required = isChecked;
+
+    if (!isChecked) {
+        emailInput.value = "";
+        clearError(emailInput, emailError);
+    }
+
+    feedbackMessage.textContent = "";
+});
+
+// 폼 입력값 검증
+function validateFeedbackForm() {
+    let isValid = true;
+
+    // 의견 유형 확인
+    if (feedbackCategory.value === "") {
+        showError(
+            feedbackCategory,
+            categoryError,
+            "의견 유형을 선택해주세요."
+        );
+        isValid = false;
+    } else {
+        clearError(feedbackCategory, categoryError);
+    }
+
+    // 의견 내용 확인
+    const opinion = opinionInput.value.trim();
+
+    if (opinion.length < 10) {
+        showError(
+            opinionInput,
+            opinionError,
+            "의견을 10자 이상 입력해주세요."
+        );
+        isValid = false;
+    } else if (opinion.length > 300) {
+        showError(
+            opinionInput,
+            opinionError,
+            "의견은 300자 이하로 입력해주세요."
+        );
+        isValid = false;
+    } else {
+        clearError(opinionInput, opinionError);
+    }
+
+    // 이메일 체크박스를 선택한 경우에만 이메일 검증
+    if (replyCheck.checked) {
+        if (emailInput.value.trim() === "") {
+            showError(
+                emailInput,
+                emailError,
+                "답변을 받을 이메일을 입력해주세요."
+            );
+            isValid = false;
+        } else if (!emailInput.validity.valid) {
+            showError(
+                emailInput,
+                emailError,
+                "올바른 이메일 형식으로 입력해주세요."
+            );
+            isValid = false;
+        } else {
+            clearError(emailInput, emailError);
+        }
+    } else {
+        clearError(emailInput, emailError);
+    }
+
+    return isValid;
+}
+
+// 저장된 의견 화면에 표시
+function renderFeedbacks() {
+    const feedbacks = loadFeedbacks();
+
+    feedbackList.replaceChildren();
+    feedbackCount.textContent = feedbacks.length;
+
+    feedbacks.forEach(function (item) {
+        const li = document.createElement("li");
+
+        const category = document.createElement("strong");
+        category.textContent = "[" + item.category + "] ";
+
+        const opinion = document.createElement("span");
+        opinion.textContent = item.opinion;
+
+        const date = document.createElement("small");
+        date.textContent = " (" + item.date + ")";
+
+        li.append(category, opinion, date);
+        feedbackList.appendChild(li);
+    });
+}
 
 // 의견 제출
 feedbackForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const email = emailInput.value.trim();
-    const opinion = opinionInput.value.trim();
+    feedbackMessage.textContent = "";
+    feedbackMessage.className = "";
 
-    if (email === "") {
-        feedbackMessage.textContent = "이메일을 입력해 주세요.";
+    // 입력값 검증
+    if (!validateFeedbackForm()) {
+        feedbackMessage.textContent = "입력 내용을 확인해주세요.";
         feedbackMessage.className = "feedback-error";
-        emailInput.focus();
+
+        const firstInvalid = feedbackForm.querySelector(
+            '[aria-invalid="true"]'
+        );
+
+        if (firstInvalid) {
+            firstInvalid.focus();
+        }
+
         return;
     }
 
-    if (!emailInput.validity.valid) {
-        feedbackMessage.textContent =
-            "이메일 형식이 올바르지 않습니다. 이메일 주소를 확인해 주세요.";
-        feedbackMessage.className = "feedback-error";
-        emailInput.focus();
-        return;
-    }
-
-    if (opinion === "") {
-        feedbackMessage.textContent = "의견을 입력해 주세요.";
-        feedbackMessage.className = "feedback-error";
-        opinionInput.focus();
-        return;
-    }
-
-    feedbackMessage.textContent =
-        "입력이 완료되었습니다. 실제로 저장되지는 않습니다.";
-    feedbackMessage.className = "feedback-success";
-
-    submitButton.textContent = "입력 완료";
+    // 중복 제출 방지
     submitButton.disabled = true;
+    submitButton.textContent = "저장 중...";
+
+    feedbackMessage.textContent = "의견을 저장하고 있습니다.";
+
+    const newFeedback = {
+        category: feedbackCategory.value,
+        opinion: opinionInput.value.trim(),
+        email: replyCheck.checked ? emailInput.value.trim() : "",
+        date: new Date().toLocaleString()
+    };
+
+    // 저장 처리
+    setTimeout(function () {
+        try {
+            const feedbacks = loadFeedbacks();
+            feedbacks.push(newFeedback);
+
+            localStorage.setItem(
+                FEEDBACK_STORAGE_KEY,
+                JSON.stringify(feedbacks)
+            );
+
+            feedbackMessage.textContent =
+                "의견이 성공적으로 저장되었습니다.";
+            feedbackMessage.className = "feedback-success";
+
+            feedbackForm.reset();
+
+            emailInput.disabled = true;
+            emailInput.required = false;
+            emailGroup.hidden = true;
+
+            opinionCount.textContent = "0 / 300자";
+
+            clearError(feedbackCategory, categoryError);
+            clearError(opinionInput, opinionError);
+            clearError(emailInput, emailError);
+
+            renderFeedbacks();
+
+        } catch (error) {
+            feedbackMessage.textContent =
+                "저장에 실패했습니다. 입력 내용을 유지했으니 다시 시도해주세요.";
+            feedbackMessage.className = "feedback-error";
+
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "의견 제출";
+        }
+    }, 500);
 });
 
-// 페이지를 열 때 저장된 계획 표시
+// 폼 초기화
+feedbackForm.addEventListener("reset", function () {
+    setTimeout(function () {
+        opinionCount.textContent = "0 / 300자";
+        feedbackMessage.textContent = "";
+        feedbackMessage.className = "";
+
+        clearError(feedbackCategory, categoryError);
+        clearError(opinionInput, opinionError);
+        clearError(emailInput, emailError);
+
+        emailInput.disabled = true;
+        emailInput.required = false;
+        emailGroup.hidden = true;
+    }, 0);
+});
+
+// 페이지를 열 때 저장된 계획과 의견 표시
 renderPlans();
+renderFeedbacks();

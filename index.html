@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,10 +39,12 @@
                     이 페이지에서는 스피드런을 처음 접하는 사람도
                     기본적인 진행 방법과 필요한 정보를 쉽게 확인할 수 있습니다.
                 </p>
+
                 <img src="images/any.png" alt="랜덤시드 Any% 플레이 화면(dwoh)">
                 <p class="image-description">
                     무작위 시드에서 엔딩 크레딧을 빠르게 띄우는 RSG Any% (dwoh)
                 </p>
+
                 <img src="images/inv.png" alt="셋시드 인벤토리 다 채우기 플레이 화면(galaxy1010_w)">
                 <p class="image-description">
                     정해둔 시드에서 보관함 칸을 빠르게 채우는 SSG Full Inventory (galaxy1010_w)
@@ -54,21 +55,27 @@
                 <h2>스피드런의 흐름</h2>
 
                 <div class="speedrun-tabs" role="tablist" aria-label="스피드런 정보">
-                    <button type="button" class="speedrun-tab active" id="tab-info" role="tab" aria-selected="true"
+                    <button type="button" class="speedrun-tab active"
+                        id="tab-info" role="tab" aria-selected="true"
                         aria-controls="panel-info" data-tab="info">
                         스피드런 기본 정보
                     </button>
-                    <button type="button" class="speedrun-tab" id="tab-flow" role="tab" aria-selected="false"
+
+                    <button type="button" class="speedrun-tab"
+                        id="tab-flow" role="tab" aria-selected="false"
                         aria-controls="panel-flow" tabindex="-1" data-tab="flow">
                         진행 과정
                     </button>
-                    <button type="button" class="speedrun-tab" id="tab-tips" role="tab" aria-selected="false"
+
+                    <button type="button" class="speedrun-tab"
+                        id="tab-tips" role="tab" aria-selected="false"
                         aria-controls="panel-tips" tabindex="-1" data-tab="tips">
                         초보자 팁
                     </button>
                 </div>
 
-                <div class="tab-panel" id="panel-info" role="tabpanel" aria-labelledby="tab-info">
+                <div class="tab-panel" id="panel-info"
+                    role="tabpanel" aria-labelledby="tab-info">
                     <h3>스피드런 기본 정보</h3>
                     <p>
                         스피드런은 다양한 종목들이 있으며, 저마다 규칙이 조금씩 다릅니다.
@@ -81,29 +88,36 @@
                     </p>
                 </div>
 
-                <div class="tab-panel" id="panel-flow" role="tabpanel" aria-labelledby="tab-flow" hidden>
+                <div class="tab-panel" id="panel-flow"
+                    role="tabpanel" aria-labelledby="tab-flow" hidden>
                     <h3>Any% Glitchless 진행 과정</h3>
+
                     <div class="feature-list">
                         <div class="feature-card">
                             <h4>오버월드</h4>
                             <p>도구와 네더 차원에 입장하기 위한 포탈 재료를 모읍니다.</p>
                         </div>
+
                         <div class="feature-card">
                             <h4>바스티온</h4>
                             <p>바스티온에서 피글린과 거래해 필요한 아이템을 얻습니다.</p>
                         </div>
+
                         <div class="feature-card">
                             <h4>포트리스</h4>
                             <p>블레이즈를 잡아 엔더의 눈 제작에 필요한 재료를 얻습니다.</p>
                         </div>
+
                         <div class="feature-card">
                             <h4>블라인드</h4>
                             <p>오버월드로 돌아와 엔더 유적의 위치를 찾습니다.</p>
                         </div>
+
                         <div class="feature-card">
                             <h4>엔드 포탈</h4>
                             <p>엔더의 눈으로 포탈을 활성화하고 엔드로 이동합니다.</p>
                         </div>
+
                         <div class="feature-card">
                             <h4>엔드</h4>
                             <p>엔더 드래곤을 처치하고 엔딩 크레딧을 띄웁니다.</p>
@@ -111,7 +125,8 @@
                     </div>
                 </div>
 
-                <div class="tab-panel" id="panel-tips" role="tabpanel" aria-labelledby="tab-tips" hidden>
+                <div class="tab-panel" id="panel-tips"
+                    role="tabpanel" aria-labelledby="tab-tips" hidden>
                     <h3>초보자 팁</h3>
                     <p>
                         무작정 빠르게 플레이하기보다는 필요한 기술과 정보를 익힌 후
@@ -160,7 +175,8 @@
                         <option value="practice">기본적인 플레이 경험이 있음</option>
                     </select>
 
-                    <p id="flow-error" class="feedback-error" role="status" aria-live="polite"></p>
+                    <p id="flow-error" class="feedback-error"
+                        role="status" aria-live="polite"></p>
 
                     <button type="button" id="flow-next-button">선택 확인</button>
                     <button type="button" id="flow-cancel-button">처음으로</button>
@@ -185,8 +201,8 @@
                     <button type="button" id="save-plan-button">
                         연습 목록에 저장
                     </button>
-                    <p id="save-plan-message" role="status" aria-live="polite"></p>
 
+                    <p id="save-plan-message" role="status" aria-live="polite"></p>
                     <button type="button" id="flow-restart-button">다시 시작</button>
                 </div>
 
@@ -202,22 +218,70 @@
                 </div>
             </section>
 
+            <!-- 9주차 과제: 의견 입력 폼 -->
             <section id="feedback">
                 <h2>의견 남기기</h2>
-                <p>페이지에 대한 의견을 남겨주세요.</p>
+                <p>마인크래프트 스피드런 가이드에 대한 의견을 남겨주세요.</p>
 
                 <form id="feedback-form" novalidate>
-                    <label for="email">이메일</label>
-                    <input type="email" id="email" placeholder="이메일을 입력하세요" aria-describedby="feedback-message">
+                    <div class="form-group">
+                        <label for="feedback-category">의견 유형</label>
+                        <select id="feedback-category" required>
+                            <option value="">유형을 선택하세요</option>
+                            <option value="질문">질문</option>
+                            <option value="정보 오류">정보 오류</option>
+                            <option value="개선 제안">개선 제안</option>
+                            <option value="기타">기타</option>
+                        </select>
+                        <p class="field-error" id="category-error"></p>
+                    </div>
 
-                    <label for="opinion">의견</label>
-                    <textarea id="opinion" placeholder="의견을 입력하세요" rows="4"
-                        aria-describedby="opinion-count feedback-message"></textarea>
+                    <div class="form-group">
+                        <label for="opinion">의견</label>
+                        <textarea
+                            id="opinion"
+                            rows="4"
+                            minlength="10"
+                            maxlength="300"
+                            placeholder="10자 이상 300자 이하로 입력하세요."
+                            required
+                            aria-describedby="opinion-count opinion-error">
+                        </textarea>
+                        <p id="opinion-count" aria-live="polite">0 / 300자</p>
+                        <p class="field-error" id="opinion-error"></p>
+                    </div>
 
-                    <p id="opinion-count" aria-live="polite">0자 입력</p>
-                    <button type="submit" id="submit-button">제출</button>
+                    <div class="form-group checkbox-group">
+                        <label for="reply-check">
+                            <input type="checkbox" id="reply-check">
+                            답변을 받을 이메일 주소를 입력하겠습니다.
+                        </label>
+                    </div>
+
+                    <div class="form-group" id="email-group" hidden>
+                        <label for="feedback-email">이메일</label>
+                        <input
+                            type="email"
+                            id="feedback-email"
+                            placeholder="example@email.com"
+                            disabled
+                            aria-describedby="email-error">
+                        <p class="field-error" id="email-error"></p>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" id="submit-button">의견 제출</button>
+                        <button type="reset" id="reset-button">초기화</button>
+                    </div>
+
                     <p id="feedback-message" role="status" aria-live="polite"></p>
                 </form>
+
+                <div id="feedback-result">
+                    <h3>제출된 의견</h3>
+                    <p>저장된 의견: <span id="feedback-count">0</span>개</p>
+                    <ul id="feedback-list"></ul>
+                </div>
             </section>
         </div>
     </main>
@@ -228,5 +292,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>

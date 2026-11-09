@@ -217,7 +217,6 @@ section p {
     border-radius: 14px;
 }
 
-/* 탭 버튼 기본 디자인 */
 .speedrun-tab {
     flex: 1;
     min-width: 0;
@@ -238,14 +237,12 @@ section p {
         transform 0.2s ease;
 }
 
-/* 마우스를 올린 탭 */
 .speedrun-tab:hover {
     background: #d5e8ff;
     color: #174f91;
     transform: translateY(-1px);
 }
 
-/* 현재 선택된 탭 */
 .speedrun-tab.active,
 .speedrun-tab[aria-selected="true"] {
     background: #ffffff;
@@ -255,13 +252,11 @@ section p {
     font-weight: 700;
 }
 
-/* 키보드 포커스 */
 .speedrun-tab:focus-visible {
     outline: 3px solid #80baff;
     outline-offset: 3px;
 }
 
-/* 탭 내용 */
 .tab-panel {
     padding: 24px;
     background: #f7faff;
@@ -345,8 +340,7 @@ section p {
     margin-bottom: 16px;
 }
 
-#steps label,
-#feedback-form label {
+#steps label {
     display: block;
     margin: 18px 0 8px;
     color: #355875;
@@ -354,7 +348,6 @@ section p {
     font-weight: 700;
 }
 
-/* 선택 상자 */
 #steps select {
     display: block;
     width: 100%;
@@ -385,7 +378,6 @@ section p {
     cursor: not-allowed;
 }
 
-/* 종목 설명 */
 #speedrun-description {
     margin: 12px 0 22px;
     padding: 13px 15px;
@@ -452,7 +444,8 @@ section p {
     box-shadow: none;
 }
 
-/* 처음으로 / 이전 버튼 */
+/* 이전 / 처음으로 버튼 */
+
 #flow-cancel-button,
 #flow-back-button,
 #flow-restart-button {
@@ -524,7 +517,7 @@ section p {
 }
 
 /* =========================
-   의견 남기기
+   의견 남기기 폼
 ========================= */
 
 #feedback-form {
@@ -533,27 +526,46 @@ section p {
     align-items: stretch;
 }
 
-#feedback-form label {
-    margin-top: 18px;
+#feedback-form .form-group {
+    margin-bottom: 14px;
 }
 
-#feedback-form input,
+#feedback-form label {
+    display: block;
+    margin: 18px 0 8px;
+    color: #355875;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* 입력창 공통 디자인 */
+
+#feedback-form input[type="email"],
+#feedback-form select,
 #feedback-form textarea {
+    display: block;
     width: 100%;
+    min-height: 46px;
     padding: 13px 14px;
     color: #2c435b;
     background: #fbfdff;
     border: 1px solid #c8d9ec;
     border-radius: 10px;
     outline: none;
-    resize: vertical;
+    font: inherit;
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease,
         background-color 0.2s ease;
 }
 
+#feedback-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
 #feedback-form input:focus,
+#feedback-form select:focus,
 #feedback-form textarea:focus {
     background: #ffffff;
     border-color: #4b94e5;
@@ -565,6 +577,42 @@ section p {
     color: #91a2b5;
 }
 
+/* 체크박스 */
+
+#feedback-form .checkbox-group {
+    margin-top: 4px;
+}
+
+#feedback-form .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+#feedback-form input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: #347fc7;
+    cursor: pointer;
+}
+
+/* 조건부 이메일 영역 */
+
+#email-group[hidden] {
+    display: none;
+}
+
+#feedback-form input:disabled {
+    color: #8b9bad;
+    background: #edf1f6;
+    cursor: not-allowed;
+}
+
+/* 글자 수 표시 */
+
 #opinion-count {
     margin: 8px 0 0;
     color: #71849a;
@@ -572,20 +620,98 @@ section p {
     font-size: 12px;
 }
 
-#feedback-form button {
-    align-self: flex-start;
-    min-width: 120px;
-    margin-top: 18px;
+/* 오류 메시지 */
+
+.field-error {
+    min-height: 0;
+    margin: 5px 0 0;
+    color: #c43e4b;
+    font-size: 13px;
 }
 
-#feedback-message {
-    margin-top: 12px;
-    font-size: 14px;
+#feedback-form [aria-invalid="true"] {
+    border: 2px solid #d93025;
+    background: #fffafa;
 }
 
 .feedback-error {
     color: #c43e4b;
     font-size: 14px;
+}
+
+.feedback-success {
+    color: #287747;
+    font-size: 14px;
+}
+
+/* 제출 및 초기화 버튼 */
+
+.form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+#feedback-form .form-buttons button {
+    min-width: 120px;
+    margin: 0;
+}
+
+#feedback-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 제출 결과 */
+
+#feedback-message {
+    min-height: 22px;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+#feedback-result {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #dce7f4;
+}
+
+#feedback-result h3 {
+    margin-bottom: 12px;
+}
+
+#feedback-count {
+    color: #28649e;
+    font-weight: 700;
+}
+
+#feedback-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 0;
+    list-style: none;
+}
+
+#feedback-list li {
+    padding: 12px 14px;
+    color: #425b76;
+    background: #f3f7fc;
+    border: 1px solid #dce7f4;
+    border-radius: 9px;
+    overflow-wrap: anywhere;
+}
+
+#feedback-list li strong {
+    color: #28649e;
+}
+
+#feedback-list li small {
+    display: block;
+    margin-top: 5px;
+    color: #8292a4;
+    font-size: 11px;
 }
 
 /* =========================
@@ -733,7 +859,11 @@ footer {
         font-size: 13px;
     }
 
-    #feedback-form button {
+    #feedback-form .form-buttons {
+        flex-direction: column;
+    }
+
+    #feedback-form .form-buttons button {
         width: 100%;
     }
 }
@@ -763,7 +893,10 @@ footer {
     }
 }
 
-/* 애니메이션 최소화 설정 */
+/* =========================
+   애니메이션 최소화 설정
+========================= */
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
